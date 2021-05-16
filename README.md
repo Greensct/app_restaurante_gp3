@@ -1,6 +1,6 @@
-# app_restaurante_gp3
+# Proyecto Restaurante Grupo 3
 
-A new Flutter project.
+Proyecto del curso Desarrollo de Aplicaciones Moviles II
 
 ## Getting Started
 
