@@ -6,9 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class FavoriteFull extends StatefulWidget {
-  final String productId;
+  final String recipeId;
 
-  const FavoriteFull({this.productId});
+  const FavoriteFull({this.recipeId});
   @override
   _FavoriteFullState createState() => _FavoriteFullState();
 }
@@ -52,7 +52,12 @@ class _FavoriteFullState extends State<FavoriteFull> {
                             height: 20.0,
                           ),
                           Text(
-                            "\$ ${favsAttr.price}",
+                            favsAttr.recipeCategoryName,
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 18.0),
+                          ),
+                          Text(
+                            favsAttr.time,
                             style: TextStyle(
                                 fontWeight: FontWeight.bold, fontSize: 18.0),
                           ),
@@ -65,12 +70,12 @@ class _FavoriteFullState extends State<FavoriteFull> {
             ),
           ),
         ),
-        positionedRemove(widget.productId),
+        positionedRemove(widget.recipeId),
       ],
     );
   }
 
-  Widget positionedRemove(String productId) {
+  Widget positionedRemove(String recipeId) {
     final favsProvider = Provider.of<FavsProvider>(context);
     GlobalMethods globalMethods = GlobalMethods();
     return Positioned(
@@ -92,7 +97,7 @@ class _FavoriteFullState extends State<FavoriteFull> {
                   globalMethods.showDialogg(
                       'Remover Favorito!',
                       'Esta receta sera eliminada de su lista',
-                      () => favsProvider.removeItem(productId),
+                      () => favsProvider.removeItem(recipeId),
                       context),
                 }),
       ),

@@ -179,7 +179,7 @@ class _UserState extends State<User> {
         transform: Matrix4.identity()..scale(scale),
         alignment: Alignment.center,
         child: FloatingActionButton(
-          backgroundColor: Colors.purple,
+          backgroundColor: Colors.green,
           heroTag: "btn1",
           onPressed: () {},
           child: Icon(Icons.camera_alt_outlined),

@@ -1,4 +1,4 @@
-import 'package:app_restaurante_gp3/inner_screens/product_details.dart';
+import 'package:app_restaurante_gp3/inner_screens/recipe_details.dart';
 import 'package:app_restaurante_gp3/models/recipe.dart';
 import 'package:flutter/material.dart';
 import 'package:badges/badges.dart';
@@ -12,12 +12,12 @@ class TipsRecipes extends StatefulWidget {
 class _TipsRecipesState extends State<TipsRecipes> {
   @override
   Widget build(BuildContext context) {
-    final productsAttributes = Provider.of<Recipe>(context);
+    final recipesAttributes = Provider.of<Recipe>(context);
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: InkWell(
-        onTap: () => Navigator.pushNamed(context, ProductDetails.routeName,
-            arguments: productsAttributes.id),
+        onTap: () => Navigator.pushNamed(context, RecipeDetails.routeName,
+            arguments: recipesAttributes.id),
         child: Container(
           width: 250,
           height: 290,
@@ -39,7 +39,7 @@ class _TipsRecipesState extends State<TipsRecipes> {
                               maxHeight:
                                   MediaQuery.of(context).size.height * 0.3),
                           child: Image.network(
-                            productsAttributes.imageUrl,
+                            recipesAttributes.imageUrl,
                             //   fit: BoxFit.fitWidth,
                           ),
                         ),
@@ -55,7 +55,7 @@ class _TipsRecipesState extends State<TipsRecipes> {
                           badgeColor: Colors.pink,
                           borderRadius: BorderRadius.only(
                               bottomRight: Radius.circular(8)),
-                          badgeContent: Text('New',
+                          badgeContent: Text('Nuevo!',
                               style: TextStyle(color: Colors.white)),
                         ),
                       ),
@@ -73,7 +73,7 @@ class _TipsRecipesState extends State<TipsRecipes> {
                       height: 4,
                     ),
                     Text(
-                      productsAttributes.description,
+                      recipesAttributes.name,
                       overflow: TextOverflow.ellipsis,
                       maxLines: 1,
                       style: TextStyle(
@@ -84,7 +84,7 @@ class _TipsRecipesState extends State<TipsRecipes> {
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 8.0),
                       child: Text(
-                        '\$ ${productsAttributes.price}',
+                        '${recipesAttributes.time}',
                         overflow: TextOverflow.ellipsis,
                         maxLines: 2,
                         style: TextStyle(
@@ -97,7 +97,7 @@ class _TipsRecipesState extends State<TipsRecipes> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          '${productsAttributes.quantity}',
+                          '${recipesAttributes.preparation}',
                           style: TextStyle(
                               fontSize: 12,
                               color: Colors.grey,

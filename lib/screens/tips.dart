@@ -10,9 +10,9 @@ class Tips extends StatelessWidget {
   Widget build(BuildContext context) {
     final popular= ModalRoute.of(context).settings.arguments as String;
     final recipesProvider = Provider.of<Recipes>(context);
-    List<Recipe> recipesList = recipesProvider.products;
+    List<Recipe> recipesList = recipesProvider.recipes;
     if(popular =='popular'){
-      recipesList=recipesProvider.popularProducts;
+      recipesList=recipesProvider.popularRecipes;
     }
     return Scaffold(
       body: GridView.count(

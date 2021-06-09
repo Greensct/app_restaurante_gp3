@@ -1,4 +1,4 @@
-import 'package:app_restaurante_gp3/inner_screens/product_details.dart';
+import 'package:app_restaurante_gp3/inner_screens/recipe_details.dart';
 import 'package:app_restaurante_gp3/models/recipe.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -6,12 +6,11 @@ import 'package:provider/provider.dart';
 class BrandsNavigationRail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final productsAttributes = Provider.of<Recipe>(context);
+    final recipesAttributes = Provider.of<Recipe>(context);
     return InkWell(
-      onTap: () => Navigator.pushNamed(context, ProductDetails.routeName,
-          arguments: productsAttributes.id),
+      onTap: () => Navigator.pushNamed(context, RecipeDetails.routeName,
+          arguments: recipesAttributes.id),
       child: Container(
-        //  color: Colors.red,
         padding: EdgeInsets.only(left: 5.0, right: 5.0),
         margin: EdgeInsets.only(right: 20.0, bottom: 5, top: 18),
         constraints: BoxConstraints(
@@ -24,7 +23,7 @@ class BrandsNavigationRail extends StatelessWidget {
                   color: Theme.of(context).backgroundColor,
                   image: DecorationImage(
                     image: NetworkImage(
-                      productsAttributes.imageUrl,
+                      recipesAttributes.imageUrl,
                     ),
                   ),
                   borderRadius: BorderRadius.all(Radius.circular(10.0)),
@@ -57,7 +56,7 @@ class BrandsNavigationRail extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Text(
-                      productsAttributes.title,
+                      recipesAttributes.name,
                       maxLines: 4,
                       style: TextStyle(
                           fontWeight: FontWeight.w700,
@@ -66,21 +65,21 @@ class BrandsNavigationRail extends StatelessWidget {
                     SizedBox(
                       height: 20.0,
                     ),
-                    FittedBox(
-                      child: Text('US ${productsAttributes.price} \$',
-                          maxLines: 1,
-                          style: TextStyle(
-                            color: Colors.red,
-                            fontSize: 30.0,
-                          )),
-                    ),
-                    SizedBox(
-                      height: 20.0,
-                    ),
-                    Text(productsAttributes.productCategoryName,
+                    Text(recipesAttributes.recipeCategoryName,
                         style: TextStyle(color: Colors.grey, fontSize: 18.0)),
                     SizedBox(
                       height: 20.0,
+                    ),
+                    SizedBox(
+                      height: 20.0,
+                    ),
+                    FittedBox(
+                      child: Text('${recipesAttributes.time}',
+                          maxLines: 1,
+                          style: TextStyle(
+                            color: Colors.green,
+                            fontSize: 30.0,
+                          )),
                     ),
                   ],
                 ),

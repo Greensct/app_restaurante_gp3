@@ -31,14 +31,11 @@ class _RecipeState extends State<Recipe> {
     'assets/images/AllSopas.jpg',
     'assets/images/AllPlatoFuerte.jpg',
     'assets/images/AllPostres.jpg',
-    'assets/images/nike.jpg',
-    'assets/images/samsung.jpg',
-    'assets/images/huawei.jpg',
   ];
   @override
   Widget build(BuildContext context) {
-    final productsData = Provider.of<Recipes>(context);
-    final popularItems = productsData.popularProducts;
+    final recipesData = Provider.of<Recipes>(context);
+    final popularItems = recipesData.popularRecipes;
     print('popularItems length ${popularItems.length}');
     return Scaffold(
       body: BackdropScaffold(
@@ -85,7 +82,7 @@ class _RecipeState extends State<Recipe> {
                   animationCurve: Curves.fastOutSlowIn,
                   animationDuration: Duration(milliseconds: 1000),
                   dotSize: 5.0,
-                  dotIncreasedColor: Colors.purple,
+                  dotIncreasedColor: Colors.green,
                   dotBgColor: Colors.black.withOpacity(0.2),
                   dotPosition: DotPosition.bottomCenter,
                   showIndicator: true,
@@ -109,7 +106,7 @@ class _RecipeState extends State<Recipe> {
                 width: double.infinity,
                 height: 180,
                 child: ListView.builder(
-                  itemCount: 7,
+                  itemCount: 4,
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (BuildContext ctx, int index) {
                     return CategoryWidget(
@@ -118,7 +115,7 @@ class _RecipeState extends State<Recipe> {
                   },
                 ),
               ),
-              Padding(
+               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Row(
                   children: [
@@ -133,7 +130,7 @@ class _RecipeState extends State<Recipe> {
                         Navigator.of(context).pushNamed(
                           BrandNavigationRailScreen.routeName,
                           arguments: {
-                            7,
+                            4,
                           },
                         );
                       },
@@ -177,7 +174,7 @@ class _RecipeState extends State<Recipe> {
                     );
                   },
                 ),
-              ),
+              ), 
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Row(

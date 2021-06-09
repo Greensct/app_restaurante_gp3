@@ -1,4 +1,4 @@
-import 'package:app_restaurante_gp3/inner_screens/product_details.dart';
+import 'package:app_restaurante_gp3/inner_screens/recipe_details.dart';
 import 'package:app_restaurante_gp3/models/recipe.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
@@ -31,7 +31,7 @@ class PopularRecipes extends StatelessWidget {
               ),
               bottomRight: Radius.circular(10.0),
             ),
-            onTap: () => Navigator.pushNamed(context, ProductDetails.routeName,
+            onTap: () => Navigator.pushNamed(context, RecipeDetails.routeName,
                 arguments: recipessAttributes.id),
             child: Column(
               children: [
@@ -60,20 +60,7 @@ class PopularRecipes extends StatelessWidget {
                         color: Colors.white,
                       ),
                     ),
-                    Positioned(
-                      right: 12,
-                      bottom: 32.0,
-                      child: Container(
-                        padding: EdgeInsets.all(10.0),
-                        color: Theme.of(context).backgroundColor,
-                        child: Text(
-                          '\$ ${recipessAttributes.price}',
-                          style: TextStyle(
-                            color: Theme.of(context).textSelectionColor,
-                          ),
-                        ),
-                      ),
-                    )
+                    
                   ],
                 ),
                 Container(
@@ -82,7 +69,7 @@ class PopularRecipes extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        recipessAttributes.title,
+                        recipessAttributes.name,
                         maxLines: 1,
                         style: TextStyle(
                             fontSize: 18.0, fontWeight: FontWeight.bold),
@@ -93,7 +80,20 @@ class PopularRecipes extends StatelessWidget {
                           Expanded(
                             flex: 5,
                             child: Text(
-                              recipessAttributes.description,
+                              recipessAttributes.recipeCategoryName,
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                fontSize: 15.0,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.grey[800],
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            flex: 5,
+                            child: Text(
+                              recipessAttributes.time,
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
                               style: TextStyle(

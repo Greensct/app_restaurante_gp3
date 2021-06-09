@@ -1,5 +1,5 @@
 import 'package:app_restaurante_gp3/consts/theme_data.dart';
-import 'package:app_restaurante_gp3/inner_screens/product_details.dart';
+import 'package:app_restaurante_gp3/inner_screens/recipe_details.dart';
 import 'package:app_restaurante_gp3/provider/dark_theme_provider.dart';
 import 'package:app_restaurante_gp3/provider/recipes.dart';
 import 'package:app_restaurante_gp3/screens/bottom_bar.dart';
@@ -62,7 +62,7 @@ class _MyAppState extends State<MyApp> {
 
               Tips.routeName: (ctx) => Tips(),
               FavoritesScreen.routeName: (ctx) => FavoritesScreen(),
-              ProductDetails.routeName: (ctx) => ProductDetails(),
+              RecipeDetails.routeName: (ctx) => RecipeDetails(),
               CategoriesFeedsScreen.routeName: (ctx) => CategoriesFeedsScreen(),
             },
           );

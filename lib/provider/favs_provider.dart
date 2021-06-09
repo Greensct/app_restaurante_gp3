@@ -10,23 +10,24 @@ class FavsProvider with ChangeNotifier {
   }
 
   void addAndRemoveFromFav(
-      String productId, double price, String title, String imageUrl) {
-    if (_favsItems.containsKey(productId)) {
-      removeItem(productId);
+      String recipeId, String time, String title, String imageUrl, String recipeCategoryName) {
+    if (_favsItems.containsKey(recipeId)) {
+      removeItem(recipeId);
     } else {
       _favsItems.putIfAbsent(
-          productId,
+          recipeId,
           () => FavsAttr(
               id: DateTime.now().toString(),
               title: title,
-              price: price,
-              imageUrl: imageUrl));
+              time: time,
+              imageUrl: imageUrl,
+              recipeCategoryName: recipeCategoryName));
     }
     notifyListeners();
   }
 
-  void removeItem(String productId) {
-    _favsItems.remove(productId);
+  void removeItem(String recipeId) {
+    _favsItems.remove(recipeId);
     notifyListeners();
   }
 

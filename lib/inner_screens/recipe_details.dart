@@ -10,26 +10,26 @@ import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:provider/provider.dart';
 
-class ProductDetails extends StatefulWidget {
-  static const routeName = '/ProductDetails';
+class RecipeDetails extends StatefulWidget {
+  static const routeName = '/RecipetDetails';
 
   @override
-  _ProductDetailsState createState() => _ProductDetailsState();
+  _RecipeDetailsState createState() => _RecipeDetailsState();
 }
 
-class _ProductDetailsState extends State<ProductDetails> {
+class _RecipeDetailsState extends State<RecipeDetails> {
   GlobalKey previewContainer = new GlobalKey();
 
   @override
   Widget build(BuildContext context) {
     final themeState = Provider.of<DarkThemeProvider>(context);
-    final productsData = Provider.of<Recipes>(context, listen: false);
-    final productId = ModalRoute.of(context).settings.arguments as String;
+    final recipesData = Provider.of<Recipes>(context, listen: false);
+    final recipeId = ModalRoute.of(context).settings.arguments as String;
 
     final favsProvider = Provider.of<FavsProvider>(context);
-    print('Id Receta $productId');
-    final prodAttr = productsData.findById(productId);
-    final productsList = productsData.products;
+    print('Id Receta $recipeId');
+    final prodAttr = recipesData.findById(recipeId);
+    final recipesList = recipesData.recipes;
     return Scaffold(
       body: Stack(
         children: <Widget>[
@@ -100,7 +100,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                             Container(
                               width: MediaQuery.of(context).size.width * 0.9,
                               child: Text(
-                                prodAttr.title,
+                                prodAttr.name,
                                 maxLines: 2,
                                 style: TextStyle(
                                   fontSize: 28.0,
@@ -108,11 +108,8 @@ class _ProductDetailsState extends State<ProductDetails> {
                                 ),
                               ),
                             ),
-                            SizedBox(
-                              height: 8,
-                            ),
                             Text(
-                              'US \$ ${prodAttr.price}',
+                              '${prodAttr.recipeCategoryName}',
                               style: TextStyle(
                                   color: themeState.darkTheme
                                       ? Theme.of(context).disabledColor
@@ -123,8 +120,14 @@ class _ProductDetailsState extends State<ProductDetails> {
                           ],
                         ),
                       ),
-
-                      const SizedBox(height: 3.0),
+                      
+                      _details(themeState.darkTheme, 'Tiempo de preparación: ', prodAttr.time),
+                      _details(themeState.darkTheme, 'Cantidad de personas: ',
+                          '${prodAttr.quantity}'),
+                      _details(themeState.darkTheme, 'Ingredientes: ', prodAttr.ingredients),
+                      _details(themeState.darkTheme, 'Popularidad: ',
+                          prodAttr.isPopular ? 'Popular' : 'Poco Visto'),
+                          const SizedBox(height: 3.0),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 8.0),
                         child: Divider(
@@ -137,7 +140,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                       Padding(
                         padding: const EdgeInsets.all(16.0),
                         child: Text(
-                          prodAttr.description,
+                          prodAttr.preparation,
                           style: TextStyle(
                             fontWeight: FontWeight.w400,
                             fontSize: 21.0,
@@ -156,13 +159,6 @@ class _ProductDetailsState extends State<ProductDetails> {
                           height: 1,
                         ),
                       ),
-                      _details(themeState.darkTheme, 'Brand: ', prodAttr.brand),
-                      _details(themeState.darkTheme, 'Quantity: ',
-                          '${prodAttr.quantity}'),
-                      _details(themeState.darkTheme, 'Category: ',
-                          prodAttr.productCategoryName),
-                      _details(themeState.darkTheme, 'Popularity: ',
-                          prodAttr.isPopular ? 'Popular' : 'Barely known'),
                       SizedBox(
                         height: 15,
                       ),
@@ -181,7 +177,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                             Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Text(
-                                'No reviews yet',
+                                'No hay reseñas aún',
                                 style: TextStyle(
                                     color: Theme.of(context).textSelectionColor,
                                     fontWeight: FontWeight.w600,
@@ -191,7 +187,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                             Padding(
                               padding: const EdgeInsets.all(2.0),
                               child: Text(
-                                'Be the first review!',
+                                'Se el primero en dejar una nota!',
                                 style: TextStyle(
                                   fontWeight: FontWeight.w400,
                                   fontSize: 20.0,
@@ -221,7 +217,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                   padding: EdgeInsets.all(8.0),
                   color: Theme.of(context).scaffoldBackgroundColor,
                   child: Text(
-                    'Suggested products:',
+                    'Otras recetas:',
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
                   ),
                 ),
@@ -230,11 +226,11 @@ class _ProductDetailsState extends State<ProductDetails> {
                   width: double.infinity,
                   height: 400,
                   child: ListView.builder(
-                    itemCount: 7,
+                    itemCount: 3,
                     scrollDirection: Axis.horizontal,
                     itemBuilder: (BuildContext ctx, int index) {
                       return ChangeNotifierProvider.value(
-                          value: productsList[index], child: TipsRecipes());
+                          value: recipesList[index], child: TipsRecipes());
                     },
                   ),
                 ),
@@ -252,13 +248,13 @@ class _ProductDetailsState extends State<ProductDetails> {
                 actions: <Widget>[
                   IconButton(
                     icon: Icon(
-                      favsProvider.getFavsItems.containsKey(productId) ?  Icons.star :Feather.star,
-                      color:favsProvider.getFavsItems.containsKey(productId) ?Colors.red: ColorsConsts.white,
+                      favsProvider.getFavsItems.containsKey(recipeId) ?  Icons.star :Feather.star,
+                      color:favsProvider.getFavsItems.containsKey(recipeId) ?Colors.red: ColorsConsts.white,
                       
                     ),
                     onPressed: () {
-                      favsProvider.addAndRemoveFromFav(productId,
-                            prodAttr.price, prodAttr.title, prodAttr.imageUrl);
+                      favsProvider.addAndRemoveFromFav(recipeId,
+                            prodAttr.time, prodAttr.name, prodAttr.imageUrl, prodAttr.recipeCategoryName);
                     },
                   ),
                 ]),

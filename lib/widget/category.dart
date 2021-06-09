@@ -27,19 +27,7 @@ class _CategoryWidgetState extends State<CategoryWidget> {
     {
       'categoryName': 'Postres',
       'categoryImagesPath': 'assets/images/CatPostres.png',
-    },
-    {
-      'categoryName': 'Laptops',
-      'categoryImagesPath': 'assets/images/CatLaptops.png',
-    },
-    {
-      'categoryName': 'Furniture',
-      'categoryImagesPath': 'assets/images/CatFurniture.jpg',
-    },
-    {
-      'categoryName': 'Watches',
-      'categoryImagesPath': 'assets/images/CatWatches.jpg',
-    },
+    }
   ];
 
   @override

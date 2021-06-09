@@ -1,7 +1,6 @@
 import 'package:app_restaurante_gp3/provider/recipes.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import 'brands_rail_widget.dart';
 
 class BrandNavigationRailScreen extends StatefulWidget {
@@ -27,22 +26,22 @@ class _BrandNavigationRailScreenState extends State<BrandNavigationRailScreen> {
     print(routeArgs.toString());
     if (_selectedIndex == 0) {
       setState(() {
-        brand = 'Addidas';
+        brand = 'Entradas';
       });
     }
     if (_selectedIndex == 1) {
       setState(() {
-        brand = 'Apple';
+        brand = 'Sopas';
       });
     }
     if (_selectedIndex == 2) {
       setState(() {
-        brand = 'Dell';
+        brand = 'Plato Fuerte';
       });
     }
     if (_selectedIndex == 3) {
       setState(() {
-        brand = 'H&M';
+        brand = 'Postres';
       });
     }
     if (_selectedIndex == 4) {
@@ -50,17 +49,8 @@ class _BrandNavigationRailScreenState extends State<BrandNavigationRailScreen> {
         brand = 'Nike';
       });
     }
-    if (_selectedIndex == 5) {
-      setState(() {
-        brand = 'Samsung';
-      });
-    }
-    if (_selectedIndex == 6) {
-      setState(() {
-        brand = 'Huawei';
-      });
-    }
-    if (_selectedIndex == 7) {
+    
+    if (_selectedIndex == 4) {
       setState(() {
         brand = 'All';
       });
@@ -88,40 +78,26 @@ class _BrandNavigationRailScreenState extends State<BrandNavigationRailScreen> {
                           _selectedIndex = index;
                           if (_selectedIndex == 0) {
                             setState(() {
-                              brand = 'Addidas';
+                              brand = 'Entradas';
                             });
                           }
                           if (_selectedIndex == 1) {
                             setState(() {
-                              brand = 'Apple';
+                              brand = 'Sopas';
                             });
                           }
                           if (_selectedIndex == 2) {
                             setState(() {
-                              brand = 'Dell';
+                              brand = 'Plato Fuerte';
                             });
                           }
                           if (_selectedIndex == 3) {
                             setState(() {
-                              brand = 'H&M';
+                              brand = 'Postres';
                             });
                           }
+                         
                           if (_selectedIndex == 4) {
-                            setState(() {
-                              brand = 'Nike';
-                            });
-                          }
-                          if (_selectedIndex == 5) {
-                            setState(() {
-                              brand = 'Samsung';
-                            });
-                          }
-                          if (_selectedIndex == 6) {
-                            setState(() {
-                              brand = 'Huawei';
-                            });
-                          }
-                          if (_selectedIndex == 7) {
                             setState(() {
                               brand = 'All';
                             });
@@ -159,13 +135,10 @@ class _BrandNavigationRailScreenState extends State<BrandNavigationRailScreen> {
                         letterSpacing: 0.8,
                       ),
                       destinations: [
-                        buildRotatedTextRailDestination('Addidas', padding),
-                        buildRotatedTextRailDestination("Apple", padding),
-                        buildRotatedTextRailDestination("Dell", padding),
-                        buildRotatedTextRailDestination("H&M", padding),
-                        buildRotatedTextRailDestination("Nike", padding),
-                        buildRotatedTextRailDestination("Samsung", padding),
-                        buildRotatedTextRailDestination("Huawei", padding),
+                        buildRotatedTextRailDestination('Entradas', padding),
+                        buildRotatedTextRailDestination("Sopas", padding),
+                        buildRotatedTextRailDestination("Plato Fuerte", padding),
+                        buildRotatedTextRailDestination("Postres", padding),
                         buildRotatedTextRailDestination("All", padding),
                       ],
                     ),
@@ -205,15 +178,13 @@ class ContentSpace extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final productsData = Provider.of<Recipes>(context, listen: false);
-    final productsBrand = productsData.findByBrand(brand);
+    final recipesData = Provider.of<Recipes>(context, listen: false);
+    final recipesCategory = recipesData.findByBrand(brand);
     if(brand=='All'){
-      for(int i=0; i<productsData.products.length;i++){
-        productsBrand.add(productsData.products[i]);
+      for(int i=0; i<recipesData.recipes.length;i++){
+        recipesCategory.add(recipesData.recipes[i]);
       }
     }
-    print('productsBrand ${productsBrand[0].imageUrl}');
-    print('brand $brand');
     return Expanded(
       child: Padding(
         padding: const EdgeInsets.fromLTRB(24, 8, 0, 0),
@@ -221,10 +192,10 @@ class ContentSpace extends StatelessWidget {
           removeTop: true,
           context: context,
           child: ListView.builder(
-            itemCount: productsBrand.length,
+            itemCount: recipesCategory.length,
             itemBuilder: (BuildContext context, int index) =>
                 ChangeNotifierProvider.value(
-                    value: productsBrand[index], child: BrandsNavigationRail()),
+                    value: recipesCategory[index], child: BrandsNavigationRail()),
           ),
         ),
       ),

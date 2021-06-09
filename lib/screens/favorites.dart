@@ -39,7 +39,7 @@ class FavoritesScreen extends StatelessWidget {
                 return ChangeNotifierProvider.value(
                   value: favsProvider.getFavsItems.values.toList()[index],
                   child: FavoriteFull(
-                    productId: favsProvider.getFavsItems.keys.toList()[index],
+                    recipeId: favsProvider.getFavsItems.keys.toList()[index],
                   ));
               },
             ),
