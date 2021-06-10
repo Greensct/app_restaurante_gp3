@@ -3,7 +3,7 @@ import 'package:app_restaurante_gp3/models/recipe.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class BrandsNavigationRail extends StatelessWidget {
+class CategoriesNavigationRail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final recipesAttributes = Provider.of<Recipe>(context);

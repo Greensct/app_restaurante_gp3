@@ -80,10 +80,10 @@ class Recipes with ChangeNotifier {
     return _categoryList;
   }
 
-  List<Recipe> findByBrand(String brandName) {
+  List<Recipe> findByCatAll(String catName) {
     List _categoryList = _recipes
         .where((element) =>
-            element.recipeCategoryName.toLowerCase().contains(brandName.toLowerCase()))
+            element.recipeCategoryName.toLowerCase().contains(catName.toLowerCase()))
         .toList();
     return _categoryList;
   }

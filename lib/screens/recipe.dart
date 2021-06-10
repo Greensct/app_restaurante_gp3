@@ -1,5 +1,5 @@
 import 'package:app_restaurante_gp3/consts/colors.dart';
-import 'package:app_restaurante_gp3/inner_screens/brands_navigation_rail.dart';
+import 'package:app_restaurante_gp3/inner_screens/categories_navigation_rail.dart';
 import 'package:app_restaurante_gp3/provider/recipes.dart';
 import 'package:app_restaurante_gp3/screens/tips.dart';
 import 'package:app_restaurante_gp3/widget/backlayer.dart';
@@ -26,7 +26,7 @@ class _RecipeState extends State<Recipe> {
     'assets/images/carousel4.png',
   ];
 
-  List _brandImages = [
+  List _categoryImages = [
     'assets/images/AllEntradas.jpg',
     'assets/images/AllSopas.jpg',
     'assets/images/AllPlatoFuerte.jpg',
@@ -128,7 +128,7 @@ class _RecipeState extends State<Recipe> {
                     FlatButton(
                       onPressed: () {
                         Navigator.of(context).pushNamed(
-                          BrandNavigationRailScreen.routeName,
+                          CategoryNavigationRailScreen.routeName,
                           arguments: {
                             4,
                           },
@@ -149,13 +149,13 @@ class _RecipeState extends State<Recipe> {
                 height: 210,
                 width: MediaQuery.of(context).size.width * 0.95,
                 child: Swiper(
-                  itemCount: _brandImages.length,
+                  itemCount: _categoryImages.length,
                   autoplay: true,
                   viewportFraction: 0.8,
                   scale: 0.9,
                   onTap: (index) {
                     Navigator.of(context).pushNamed(
-                      BrandNavigationRailScreen.routeName,
+                      CategoryNavigationRailScreen.routeName,
                       arguments: {
                         index,
                       },
@@ -167,7 +167,7 @@ class _RecipeState extends State<Recipe> {
                       child: Container(
                         color: Colors.blueGrey,
                         child: Image.asset(
-                          _brandImages[index],
+                          _categoryImages[index],
                           fit: BoxFit.fill,
                         ),
                       ),

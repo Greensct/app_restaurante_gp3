@@ -1,22 +1,22 @@
 import 'package:app_restaurante_gp3/provider/recipes.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'brands_rail_widget.dart';
+import 'categories_rail_widget.dart';
 
-class BrandNavigationRailScreen extends StatefulWidget {
-  BrandNavigationRailScreen({Key key}) : super(key: key);
+class CategoryNavigationRailScreen extends StatefulWidget {
+  CategoryNavigationRailScreen({Key key}) : super(key: key);
 
-  static const routeName = '/brands_navigation_rail';
+  static const routeName = '/categories_navigation_rail';
   @override
-  _BrandNavigationRailScreenState createState() =>
-      _BrandNavigationRailScreenState();
+  _CategoryNavigationRailScreenState createState() =>
+      _CategoryNavigationRailScreenState();
 }
 
-class _BrandNavigationRailScreenState extends State<BrandNavigationRailScreen> {
+class _CategoryNavigationRailScreenState extends State<CategoryNavigationRailScreen> {
   int _selectedIndex = 0;
   final padding = 8.0;
   String routeArgs;
-  String brand;
+  String category;
   @override
   void didChangeDependencies() {
     routeArgs = ModalRoute.of(context).settings.arguments.toString();
@@ -26,33 +26,33 @@ class _BrandNavigationRailScreenState extends State<BrandNavigationRailScreen> {
     print(routeArgs.toString());
     if (_selectedIndex == 0) {
       setState(() {
-        brand = 'Entradas';
+        category = 'Entradas';
       });
     }
     if (_selectedIndex == 1) {
       setState(() {
-        brand = 'Sopas';
+        category = 'Sopas';
       });
     }
     if (_selectedIndex == 2) {
       setState(() {
-        brand = 'Plato Fuerte';
+        category = 'Plato Fuerte';
       });
     }
     if (_selectedIndex == 3) {
       setState(() {
-        brand = 'Postres';
+        category = 'Postres';
       });
     }
     if (_selectedIndex == 4) {
       setState(() {
-        brand = 'Nike';
+        category = 'Nike';
       });
     }
     
     if (_selectedIndex == 4) {
       setState(() {
-        brand = 'All';
+        category = 'All';
       });
     }
     super.didChangeDependencies();
@@ -78,31 +78,31 @@ class _BrandNavigationRailScreenState extends State<BrandNavigationRailScreen> {
                           _selectedIndex = index;
                           if (_selectedIndex == 0) {
                             setState(() {
-                              brand = 'Entradas';
+                              category = 'Entradas';
                             });
                           }
                           if (_selectedIndex == 1) {
                             setState(() {
-                              brand = 'Sopas';
+                              category = 'Sopas';
                             });
                           }
                           if (_selectedIndex == 2) {
                             setState(() {
-                              brand = 'Plato Fuerte';
+                              category = 'Plato Fuerte';
                             });
                           }
                           if (_selectedIndex == 3) {
                             setState(() {
-                              brand = 'Postres';
+                              category = 'Postres';
                             });
                           }
                          
                           if (_selectedIndex == 4) {
                             setState(() {
-                              brand = 'All';
+                              category = 'All';
                             });
                           }
-                          print(brand);
+                          print(category);
                         });
                       },
                       labelType: NavigationRailLabelType.all,
@@ -149,7 +149,7 @@ class _BrandNavigationRailScreenState extends State<BrandNavigationRailScreen> {
           ),
           // This is the main content.
 
-          ContentSpace(context, brand)
+          ContentSpace(context, category)
         ],
       ),
     );
@@ -173,14 +173,14 @@ NavigationRailDestination buildRotatedTextRailDestination(
 class ContentSpace extends StatelessWidget {
   // final int _selectedIndex;
 
-  final String brand;
-  ContentSpace(BuildContext context, this.brand);
+  final String category;
+  ContentSpace(BuildContext context, this.category);
 
   @override
   Widget build(BuildContext context) {
     final recipesData = Provider.of<Recipes>(context, listen: false);
-    final recipesCategory = recipesData.findByBrand(brand);
-    if(brand=='All'){
+    final recipesCategory = recipesData.findByCatAll(category);
+    if(category=='All'){
       for(int i=0; i<recipesData.recipes.length;i++){
         recipesCategory.add(recipesData.recipes[i]);
       }
@@ -195,7 +195,7 @@ class ContentSpace extends StatelessWidget {
             itemCount: recipesCategory.length,
             itemBuilder: (BuildContext context, int index) =>
                 ChangeNotifierProvider.value(
-                    value: recipesCategory[index], child: BrandsNavigationRail()),
+                    value: recipesCategory[index], child: CategoriesNavigationRail()),
           ),
         ),
       ),

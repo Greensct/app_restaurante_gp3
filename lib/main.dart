@@ -6,7 +6,7 @@ import 'package:app_restaurante_gp3/screens/bottom_bar.dart';
 import 'package:app_restaurante_gp3/screens/favorites.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'inner_screens/brands_navigation_rail.dart';
+import 'inner_screens/categories_navigation_rail.dart';
 import 'inner_screens/categories_feeds.dart';
 import 'provider/favs_provider.dart';
 import 'screens/tips.dart';
@@ -51,14 +51,14 @@ class _MyAppState extends State<MyApp> {
         child:
             Consumer<DarkThemeProvider>(builder: (context, themeData, child) {
           return MaterialApp(
-            title: 'Flutter Demo',
+            title: 'DAMII App Restaurante Grupo 3',
             theme: Styles.themeData(themeChangeProvider.darkTheme, context),
             home: BottomBarScreen(),
             //initialRoute: '/',
             routes: {
               //   '/': (ctx) => LandingPage(),
-              BrandNavigationRailScreen.routeName: (ctx) =>
-                  BrandNavigationRailScreen(),
+              CategoryNavigationRailScreen.routeName: (ctx) =>
+                  CategoryNavigationRailScreen(),
 
               Tips.routeName: (ctx) => Tips(),
               FavoritesScreen.routeName: (ctx) => FavoritesScreen(),
